@@ -1,0 +1,19 @@
+== ROUND C-VARIANT (first masked run, 2026-11-20 ~06:5x UTC, same command as roundC_masked.txt) ==
+Same harness, expectation still `detected` at that time; anti-emulation was already
+silenced by the DMI masks, and this run additionally failed the behavioral check:
+
+== FULL SUITE: validate_all_checks() (repo main) ==
+[1/6] Clock-Skew & Oscillator Drift...  Result: PASS
+[2/6] Cache Timing Fingerprint...       Result: FAIL
+[3/6] SIMD Unit Identity...             Result: PASS
+[4/6] Thermal Drift Entropy...          Result: PASS
+[5/6] Instruction Path Jitter...        Result: PASS
+[6/6] Anti-Emulation Checks...          Result: PASS
+
+OVERALL RESULT: FAILED
+Failed checks: ['cache_timing']
+
+Interpretation: under QEMU TCG the L1/L2/L3 latency gradient is non-deterministic
+on a loaded host. This run FAILed cache_timing (l2_l1 and l3_l2 ratios collapsed);
+the re-run (roundC_masked.txt) passed it at l2_l1=1.078. Either way check 6 alone
+is not the only layer standing between a masked QEMU container and full rewards.

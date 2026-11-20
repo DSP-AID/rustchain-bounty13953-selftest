@@ -1,0 +1,138 @@
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+### rustchain_linux_miner.py --dry-run (emulated aarch64) ###
+======================================================================
+RustChain Local Linux Miner
+RIP-PoA Hardware Fingerprint + Serial Binding v2.0
+======================================================================
+Node: https://rustchain.org
+Wallet: 62526198db24d69f6a3d3a5aa9982a174c0b2dRTC
+Serial present: yes
+======================================================================
+
+[FINGERPRINT] Running 6 hardware fingerprint checks...
+Running 6 Hardware Fingerprint Checks...
+==================================================
+
+[1/6] Clock-Skew & Oscillator Drift...
+  Result: PASS
+
+[2/6] Cache Timing Fingerprint...
+  Result: PASS
+
+[3/6] SIMD Unit Identity...
+  Result: PASS
+
+[4/6] Thermal Drift Entropy...
+  Result: PASS
+
+[5/6] Instruction Path Jitter...
+  Result: PASS
+
+[6/6] Anti-Emulation Checks...
+  Result: FAIL
+
+==================================================
+OVERALL RESULT: FAILED
+Failed checks: ['anti_emulation']
+[FINGERPRINT] FAILED checks: ['anti_emulation']
+[FINGERPRINT] WARNING: May receive reduced/zero rewards
+
+[DRY-RUN] RustChain Linux Miner preflight
+[DRY-RUN] No mining or network state will be modified
+[DRY-RUN] Node URL: https://rustchain.org
+[DRY-RUN] Wallet: 62526198db24d69f6a3d3a5aa9982a174c0b2dRTC
+[DRY-RUN] Hostname: 8ab2b47e62be
+[DRY-RUN] CPU: Intel(R) Xeon(R) CPU E5-2695 v4 @ 2.10GHz
+[DRY-RUN] Cores: 10
+[DRY-RUN] Memory(GB): 32
+[DRY-RUN] MAC count: 1
+[DRY-RUN] Serial present: yes
+[DRY-RUN] Fingerprint checks available: yes
+[DRY-RUN] Fingerprint pass status: False
+[DRY-RUN] Health probe: HTTP 200
+[DRY-RUN] Node version: 2.2.1-rip200
+[DRY-RUN] Response body: {
+  "backup_age_hours": 1.3753587118784587,
+  "db_rw": true,
+  "ok": true,
+  "tip_age_slots": 0,
+  "uptime_s": 28331,
+  "version": "2.2.1-rip200"
+}
+[DRY-RUN] Next real steps would be: attest -> enroll -> mine loop
+
+### bounty_selftest.py (emulated aarch64) ###
+== ENV PROBE ==
+{
+  "machine": "aarch64",
+  "python": "3.12.16",
+  "cpuinfo_vendor": "CPU implementer\t: 0x00",
+  "cpuinfo_model": "model name\t: ARMv8 Processor rev 0 (v8l)",
+  "cpuinfo_has_hypervisor_flag": false,
+  "dmi": {
+    "product_name": "Virtual Machine",
+    "sys_vendor": "Microsoft Corporation",
+    "board_vendor": "Microsoft Corporation",
+    "board_name": "Virtual Machine",
+    "bios_vendor": "American Megatrends Inc.",
+    "chassis_vendor": "Microsoft Corporation",
+    "chassis_asset_tag": "5939-7816-4804-0279-2323-2873-31"
+  },
+  "systemd_detect_virt": "binary-absent",
+  "container_env": {}
+}
+
+== ANTI-EMULATION: repo fingerprint_checks.py (Rustchain main) ==
+{
+  "vm_indicators": [
+    "/sys/class/dmi/id/sys_vendor:microsoft corporation",
+    "/sys/class/dmi/id/board_vendor:microsoft corporation",
+    "/sys/class/dmi/id/chassis_vendor:microsoft corporation"
+  ],
+  "indicator_count": 3,
+  "is_likely_vm": true,
+  "fail_reason": "vm_detected"
+}
+
+== ANTI-EMULATION: clawrtc==1.8.0 bundled check ==
+{
+  "vm_indicators": [
+    "/sys/class/dmi/id/sys_vendor:microsoft corporation",
+    "/sys/class/dmi/id/board_vendor:microsoft corporation",
+    "/sys/class/dmi/id/chassis_vendor:microsoft corporation"
+  ],
+  "indicator_count": 3,
+  "is_likely_vm": true,
+  "fail_reason": "vm_detected"
+}
+
+== FULL SUITE: validate_all_checks() (repo main) ==
+Running 6 Hardware Fingerprint Checks...
+==================================================
+
+[1/6] Clock-Skew & Oscillator Drift...
+  Result: PASS
+
+[2/6] Cache Timing Fingerprint...
+  Result: PASS
+
+[3/6] SIMD Unit Identity...
+  Result: PASS
+
+[4/6] Thermal Drift Entropy...
+  Result: PASS
+
+[5/6] Instruction Path Jitter...
+  Result: PASS
+
+[6/6] Anti-Emulation Checks...
+  Result: FAIL
+
+==================================================
+OVERALL RESULT: FAILED
+Failed checks: ['anti_emulation']
+
+SELFTEST(expect=detected): PASS

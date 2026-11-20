@@ -1,0 +1,164 @@
+== ENV PROBE ==
+{
+  "machine": "aarch64",
+  "python": "3.12.16",
+  "cpuinfo_vendor": "CPU implementer\t: 0x00",
+  "cpuinfo_model": "model name\t: ARMv8 Processor rev 0 (v8l)",
+  "cpuinfo_has_hypervisor_flag": false,
+  "dmi": {
+    "product_name": "PRIME Z790-P WIFI",
+    "sys_vendor": "ASUSTeK COMPUTER INC.",
+    "board_vendor": "ASUSTeK COMPUTER INC.",
+    "board_name": "PRIME Z790-P WIFI",
+    "bios_vendor": "American Megatrends Inc.",
+    "chassis_vendor": "Default string",
+    "chassis_asset_tag": "Default string"
+  },
+  "systemd_detect_virt": "binary-absent",
+  "container_env": {}
+}
+
+!! QEMU_SYNTHETIC_CPUINFO: uname says aarch64 and cpuinfo is ARM-styled, but CPU implementer 0x00 / 'ARMv8 Processor rev 0 (v8l)' is the TCG fake-CPU signature, not real silicon
+
+== ANTI-EMULATION: repo fingerprint_checks.py (Rustchain main) ==
+{
+  "vm_indicators": [],
+  "indicator_count": 0,
+  "is_likely_vm": false
+}
+
+== ANTI-EMULATION: clawrtc==1.8.0 bundled check ==
+{
+  "vm_indicators": [],
+  "indicator_count": 0,
+  "is_likely_vm": false
+}
+
+== FULL SUITE: validate_all_checks() (repo main) ==
+Running 6 Hardware Fingerprint Checks...
+==================================================
+
+[1/6] Clock-Skew & Oscillator Drift...
+  Result: PASS
+
+[2/6] Cache Timing Fingerprint...
+  Result: PASS
+
+[3/6] SIMD Unit Identity...
+  Result: PASS
+
+[4/6] Thermal Drift Entropy...
+  Result: PASS
+
+[5/6] Instruction Path Jitter...
+  Result: PASS
+
+[6/6] Anti-Emulation Checks...
+  Result: PASS
+
+==================================================
+OVERALL RESULT: ALL CHECKS PASSED
+
+SELFTEST(expect=clean): PASS
+
+### fingerprint_checks.py detailed JSON (masked, emulated aarch64) ###
+Running 6 Hardware Fingerprint Checks...
+==================================================
+
+[1/6] Clock-Skew & Oscillator Drift...
+  Result: PASS
+
+[2/6] Cache Timing Fingerprint...
+  Result: PASS
+
+[3/6] SIMD Unit Identity...
+  Result: PASS
+
+[4/6] Thermal Drift Entropy...
+  Result: PASS
+
+[5/6] Instruction Path Jitter...
+  Result: PASS
+
+[6/6] Anti-Emulation Checks...
+  Result: PASS
+
+==================================================
+OVERALL RESULT: ALL CHECKS PASSED
+
+
+Detailed Results:
+{
+  "clock_drift": {
+    "passed": true,
+    "data": {
+      "mean_ns": 167702203,
+      "stdev_ns": 8927310,
+      "cv": 0.053233,
+      "drift_stdev": 13007542
+    }
+  },
+  "cache_timing": {
+    "passed": true,
+    "data": {
+      "arch": "aarch64",
+      "l1_ns": 5936.88,
+      "l2_ns": 6399.23,
+      "l3_ns": 6221.15,
+      "l2_l1_ratio": 1.078,
+      "l3_l2_ratio": 0.972
+    }
+  },
+  "simd_identity": {
+    "passed": true,
+    "data": {
+      "arch": "aarch64",
+      "simd_flags_count": 70,
+      "has_sse": false,
+      "has_avx": false,
+      "has_altivec": false,
+      "has_neon": false,
+      "sample_flags": [
+        "fp",
+        "asimd",
+        "aes",
+        "pmull",
+        "sha1",
+        "sha2",
+        "crc32",
+        "atomics",
+        "fphp",
+        "asimdhp"
+      ]
+    }
+  },
+  "thermal_drift": {
+    "passed": true,
+    "data": {
+      "cold_avg_ns": 612597367,
+      "hot_avg_ns": 613056294,
+      "cold_stdev": 19936913,
+      "hot_stdev": 14396911,
+      "drift_ratio": 1.0007
+    }
+  },
+  "instruction_jitter": {
+    "passed": true,
+    "data": {
+      "int_avg_ns": 64655364,
+      "fp_avg_ns": 51937499,
+      "branch_avg_ns": 33822985,
+      "int_stdev": 5015728,
+      "fp_stdev": 5422389,
+      "branch_stdev": 4801582
+    }
+  },
+  "anti_emulation": {
+    "passed": true,
+    "data": {
+      "vm_indicators": [],
+      "indicator_count": 0,
+      "is_likely_vm": false
+    }
+  }
+}

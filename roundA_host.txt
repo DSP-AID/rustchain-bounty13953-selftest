@@ -1,0 +1,79 @@
+$ uname -a  # linserv (10.0.0.40), x86_64 Hyper-V guest
+Linux linserv 6.8.0-149-generic #149-UPTU SMP PREEMPT_DYNAMIC Fri Oct 23 13:21:10 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+$ python3 run_all.sh host   # -> bounty_selftest.py detected
+
+== ENV PROBE ==
+{
+  "machine": "x86_64",
+  "python": "3.12.3",
+  "cpuinfo_vendor": "vendor_id\t: GenuineIntel",
+  "cpuinfo_model": "model name\t: Intel(R) Xeon(R) CPU E5-2695 v4 @ 2.10GHz",
+  "cpuinfo_has_hypervisor_flag": true,
+  "dmi": {
+    "product_name": "Virtual Machine",
+    "sys_vendor": "Microsoft Corporation",
+    "board_vendor": "Microsoft Corporation",
+    "board_name": "Virtual Machine",
+    "bios_vendor": "American Megatrends Inc.",
+    "chassis_vendor": "Microsoft Corporation",
+    "chassis_asset_tag": "5939-7816-4804-0279-2323-2873-31"
+  },
+  "systemd_detect_virt": "microsoft",
+  "container_env": {}
+}
+
+== ANTI-EMULATION: repo fingerprint_checks.py (Rustchain main) ==
+{
+  "vm_indicators": [
+    "/sys/class/dmi/id/sys_vendor:microsoft corporation",
+    "/sys/class/dmi/id/board_vendor:microsoft corporation",
+    "/sys/class/dmi/id/chassis_vendor:microsoft corporation",
+    "cpuinfo:hypervisor",
+    "systemd_detect_virt:microsoft"
+  ],
+  "indicator_count": 5,
+  "is_likely_vm": true,
+  "fail_reason": "vm_detected"
+}
+
+== ANTI-EMULATION: clawrtc==1.8.0 bundled check ==
+{
+  "vm_indicators": [
+    "/sys/class/dmi/id/sys_vendor:microsoft corporation",
+    "/sys/class/dmi/id/board_vendor:microsoft corporation",
+    "/sys/class/dmi/id/chassis_vendor:microsoft corporation",
+    "cpuinfo:hypervisor",
+    "systemd_detect_virt:microsoft"
+  ],
+  "indicator_count": 5,
+  "is_likely_vm": true,
+  "fail_reason": "vm_detected"
+}
+
+== FULL SUITE: validate_all_checks() (repo main) ==
+Running 6 Hardware Fingerprint Checks...
+==================================================
+
+[1/6] Clock-Skew & Oscillator Drift...
+  Result: PASS
+
+[2/6] Cache Timing Fingerprint...
+  Result: PASS
+
+[3/6] SIMD Unit Identity...
+  Result: PASS
+
+[4/6] Thermal Drift Entropy...
+  Result: PASS
+
+[5/6] Instruction Path Jitter...
+  Result: PASS
+
+[6/6] Anti-Emulation Checks...
+  Result: FAIL
+
+==================================================
+OVERALL RESULT: FAILED
+Failed checks: ['anti_emulation']
+
+SELFTEST(expect=detected): PASS
